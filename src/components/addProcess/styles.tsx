@@ -13,7 +13,7 @@ export const ChoiceWrapper = styled.div`
 `;
 
 export const ChoiceDiv = styled.button`
-  padding: 0 3%;
+  padding: 0 15px;
   height: 25px;
   border: 2px solid ${MAIN_COLOR};
   border-radius: 24px;
@@ -41,62 +41,62 @@ export const IntroChapter = styled.div`
 `;
 
 export const FlexContainer = styled.div`
-width:100%;
-display:flex;
-justify-content:space-between;
-`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 
 export const ColumnTitle = styled.span`
-width:32%;
-margin-top:50px;
-font-size:14px;
-`
+  width: 32%;
+  margin-top: 50px;
+  font-size: 14px;
+`;
 
 export const ProcessInput = styled.input`
-width:32%;
-margin-top:15px;
-background-color:whitesmoke;
-border:1px solid gray;
-height:40px;
-border-radius:5px;
-padding:0 15px;
-box-sizing:border-box;  
-color:gray;
-font-size:13px;
-:focus{
-  box-shadow:0px 0px 2px ${MAIN_COLOR};
-}
-`
+  width: 32%;
+  margin-top: 15px;
+  background-color: whitesmoke;
+  border: 1px solid gray;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  color: gray;
+  font-size: 13px;
+  :focus {
+    box-shadow: 0px 0px 2px ${MAIN_COLOR};
+  }
+`;
 
 export const SubmitBtn = styled.button`
-width:80px;
-height:30px;
-background-color:${MAIN_COLOR};
-color:white;
-border:none;
-border-radius:5px;
-margin-top:10px;
-font-weight:bold;
-margin-bottom:40px;
-:hover{
-  opacity:0.8;
-}
-`
+  width: 80px;
+  height: 30px;
+  background-color: ${MAIN_COLOR};
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  :hover {
+    opacity: 0.8;
+  }
+`;
 
 export const List = styled.div`
-width:100%;
-border-bottom:1px solid ${BORDER_COLOR};
-padding: 10px 0;
-display:flex;
-justify-content:space-between;
-margin-top:20px;
-`
+  width: 100%;
+  border-bottom: 1px solid ${BORDER_COLOR};
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
 
 export const ListContents = styled.div`
-border-right:1px solid ${BORDER_COLOR};
-width:33%;
-text-align:center;
-height:20px;
-color:gray;
-font-size:14px;
-`
+  border-right: 1px solid ${BORDER_COLOR};
+  width: 33%;
+  text-align: center;
+  height: 20px;
+  color: gray;
+  font-size: 14px;
+`;

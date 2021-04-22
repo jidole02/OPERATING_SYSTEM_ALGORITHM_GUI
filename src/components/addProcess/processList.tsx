@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { ProcessData } from '../interface'
 import * as s from './styles'
 
