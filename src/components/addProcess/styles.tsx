@@ -89,6 +89,7 @@ border-bottom:1px solid ${BORDER_COLOR};
 padding: 10px 0;
 display:flex;
 justify-content:space-between;
+margin-top:20px;
 `
 
 export const ListContents = styled.div`
