@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MAIN_COLOR, PRIMARY_WIDTH } from "../../style";
+import { BORDER_COLOR, MAIN_COLOR, PRIMARY_WIDTH } from "../../style";
 
 export const AllWrapper = styled.div`
   width: ${PRIMARY_WIDTH};
@@ -49,6 +49,7 @@ justify-content:space-between;
 export const ColumnTitle = styled.span`
 width:32%;
 margin-top:50px;
+font-size:14px;
 `
 
 export const ProcessInput = styled.input`
@@ -76,7 +77,25 @@ border:none;
 border-radius:5px;
 margin-top:10px;
 font-weight:bold;
+margin-bottom:40px;
 :hover{
   opacity:0.8;
 }
+`
+
+export const List = styled.div`
+width:100%;
+border-bottom:1px solid ${BORDER_COLOR};
+padding: 10px 0;
+display:flex;
+justify-content:space-between;
+`
+
+export const ListContents = styled.div`
+border-right:1px solid ${BORDER_COLOR};
+width:33%;
+text-align:center;
+height:20px;
+color:gray;
+font-size:14px;
 `

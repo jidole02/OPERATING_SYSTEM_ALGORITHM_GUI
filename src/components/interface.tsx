@@ -4,6 +4,6 @@ export interface InforChapterParams{
 
 export interface ProcessData{
     pname : string;
-    ptime : number;
-    endTime : number;
+    ptime : number | "";
+    endTime : number | "";
 }
