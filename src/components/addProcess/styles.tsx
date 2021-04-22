@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { MAIN_COLOR, PRIMARY_WIDTH } from "../../style";
 
 export const AllWrapper = styled.div`
-width:${PRIMARY_WIDTH};
-margin-top:60px;
-`
+  width: ${PRIMARY_WIDTH};
+  margin-top: 60px;
+`;
 
 export const ChoiceWrapper = styled.div`
   width: 100%;
   display: flex;
-  margin-top:20px;
+  margin-top: 20px;
 `;
 
 export const ChoiceDiv = styled.button`
@@ -27,6 +27,56 @@ export const ChoiceDiv = styled.button`
 
 /* 종류 선택하세요 멘트 */
 export const ChoiceMent = styled.p`
+  color: gray;
+  font-size: 13px;
+`;
+
+export const IntroChapter = styled.div`
+  width: 100%;
+  border-bottom: 1px solid gray;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  margin-top: 40px;
+  font-weight: bold;
+`;
+
+export const FlexContainer = styled.div`
+width:100%;
+display:flex;
+justify-content:space-between;
+`
+
+export const ColumnTitle = styled.span`
+width:32%;
+margin-top:50px;
+`
+
+export const ProcessInput = styled.input`
+width:32%;
+margin-top:15px;
+background-color:whitesmoke;
+border:1px solid gray;
+height:40px;
+border-radius:5px;
+padding:0 15px;
+box-sizing:border-box;  
 color:gray;
 font-size:13px;
+:focus{
+  box-shadow:0px 0px 2px ${MAIN_COLOR};
+}
+`
+
+export const SubmitBtn = styled.button`
+width:80px;
+height:30px;
+background-color:${MAIN_COLOR};
+color:white;
+border:none;
+border-radius:5px;
+margin-top:10px;
+font-weight:bold;
+:hover{
+  opacity:0.8;
+}
 `
