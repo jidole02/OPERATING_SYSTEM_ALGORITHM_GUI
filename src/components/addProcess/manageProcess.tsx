@@ -8,6 +8,7 @@ export default function ManageProcess() {
     pname: "",
     ptime: "",
     endTime: "",
+    id:0
   });
   const { pname, ptime, endTime } = data;
   const handleData = (e: any): void => {
@@ -29,7 +30,8 @@ export default function ManageProcess() {
             setData({
                 pname:"",
                 ptime:"",
-                endTime:""
+                endTime:"",
+                id:0
             })
             return;
         }
