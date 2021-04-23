@@ -7,3 +7,7 @@ export interface ProcessData{
     ptime : number | "";
     endTime : number | "";
 }
+
+export interface StyleProps{
+    height : string;
+}

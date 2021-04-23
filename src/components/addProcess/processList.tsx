@@ -8,8 +8,8 @@ export default function ProcessList({arr} : any) {
             return(
                 <s.List key={index}>
                 <s.ListContents>{e.pname}</s.ListContents>
-                <s.ListContents>{e.ptime} 초</s.ListContents>
-                <s.ListContents>{e.endTime} 초</s.ListContents>
+                <s.ListContents>실행 : {e.ptime} 초</s.ListContents>
+                <s.ListContents>도착 : {e.endTime} 초</s.ListContents>
             </s.List>
             )
         })}
