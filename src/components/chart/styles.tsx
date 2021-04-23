@@ -8,7 +8,7 @@ export const AllWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom:100px;
+  margin-bottom: 100px;
 `;
 
 export const Cotainer = styled.div`
@@ -19,10 +19,15 @@ export const ChartTop = styled.div`
   width: 100%;
   border-bottom: 1px solid gray;
   margin-top: 50px;
-  padding-bottom: 15px;
-  padding-left: 50px;
+  padding-left: 47px;
   box-sizing: border-box;
   color: gray;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  align-items: flex-end;
+  padding-right: ${(props: StyleProps) => `${props.padding}%`};
+  box-sizing:border-box;
 `;
 
 export const UseContainer = styled.div`
@@ -42,15 +47,47 @@ export const ProcessNameWrapper = styled(UseContainer)`
 
 export const GraphWrapper = styled(UseContainer)`
   width: 100%;
+  position:relative;
 `;
 
 export const Graph = styled.div`
-width:100%;
-height:30px;
-display:flex;
-`
+  width: 100%;
+  height: 30px;
+  display: flex;
+`;
 
 export const NoneDoGraph = styled.div`
-width:2%;
-background-color:blue;
+  width: 2%;
+  background-color: blue;
+`;
+
+export const TimeLine = styled.div`
+  border-left: 1px solid gray;
+  height: 15px;
+`;
+
+export const SmallTimeLine = styled.div`
+  border-left: 1px solid gray;
+  height: 5px;
+`;
+
+export const GraphLineWrapper = styled.div`
+width:100%;
+position:absolute;
+height:100px;
+bottom:0;
+height:100%;
+opacity:0.5;
+display:flex;
+justify-content:space-between;
+padding-right: ${(props: StyleProps) => `${props.padding}%`};
+box-sizing:border-box;
+`
+
+export const GraphLine = styled.div`
+  border-left: 1px dashed gray;
+  height:100%;
+  :first-of-type{
+    opacity:0;
+  }
 `

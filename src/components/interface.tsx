@@ -10,5 +10,6 @@ export interface ProcessData{
 }
 
 export interface StyleProps{
-    height : string;
+    height? : string;
+    padding? : number;
 }
