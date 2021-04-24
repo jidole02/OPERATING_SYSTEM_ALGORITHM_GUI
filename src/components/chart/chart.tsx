@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { MAIN_COLOR } from "../../style";
 import { ProcessData } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
 
 export default function Chart() {
+  const data:any = useSelector(state=>state);
+  console.log(data.arr.arr)
   const arr: ProcessData[] = [
     { pname: "p1", ptime: 10, endTime: 0, id: 1 },
     { pname: "p2", ptime: 3, endTime: 3, id: 2 },
@@ -33,6 +36,7 @@ export default function Chart() {
       }
     }
   };
+  
   // 실행시간 합
   const DecisionWidthValue = (): number => {
     let sum: number = 0;
@@ -45,6 +49,7 @@ export default function Chart() {
     }
     return 0;
   };
+
   useEffect(() => {
     setRender(true);
   }, []);
@@ -64,13 +69,16 @@ export default function Chart() {
       if (i === DecisionWidthValue() - 1) setTimeline(someArr);
     }
   }, [DecisionWidthValue()]);
+
+
   useEffect(() => {
+    console.log("정렬 후")
     // 정렬 다 됬으면
-    console.log(SortArr);
     let node = (e: any) => {
       return document.getElementById(`${e}`);
     };
     for (let i = 0; i < SortArr.length; i++) {
+      // 그래프 하나씩 찍어주는 곳
       let div = node(SortArr[i].id);
       let InsertNode = (color: string) => {
         return div?.insertAdjacentHTML(
@@ -118,6 +126,8 @@ export default function Chart() {
       }
     }
   }, [SortArr]);
+
+
   return (
     <s.AllWrapper>
       <InforOfChapter title="FCFS 스케쥴링 표" />

@@ -13,3 +13,12 @@ export interface StyleProps{
     height? : string;
     padding? : number;
 }
+
+export interface ActionType{
+    HANDLE_ARR? : string
+}
+
+export interface Action{
+    type:ActionType;
+    arr:ProcessData[];
+}

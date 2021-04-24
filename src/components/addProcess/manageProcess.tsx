@@ -13,7 +13,7 @@ export default function ManageProcess() {
   const { pname, ptime, endTime } = data;
   const handleData = (e: any): void => {
     const { name, value } = e.target;
-    if (name !== "pname" && value < 1) {
+    if (name !== "pname" && value < 0) {
         e.target.value = ""
         return;
     }

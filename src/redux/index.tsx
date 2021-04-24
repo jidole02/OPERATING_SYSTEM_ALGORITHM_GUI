@@ -1,0 +1,1 @@
+export {handleArr} from './addArr/action'

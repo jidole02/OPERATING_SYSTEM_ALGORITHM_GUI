@@ -1,7 +1,14 @@
+import { useDispatch } from 'react-redux'
 import { ProcessData } from '../interface'
 import * as s from './styles'
+import { useEffect } from 'react';
+import { handleArr } from '../../redux';
 
 export default function ProcessList({arr} : any) {
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(handleArr(arr));
+    },[arr])
     return(
         <>
         {arr.map((e : ProcessData,index : number)=>{
