@@ -15,10 +15,12 @@ export interface StyleProps{
 }
 
 export interface ActionType{
-    HANDLE_ARR? : string
+    HANDLE_ARR? : string;
+    READY_ARR? : string;
 }
 
 export interface Action{
     type:ActionType;
     arr:ProcessData[];
+    ready:boolean;
 }

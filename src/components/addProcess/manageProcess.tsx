@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ReadyArr } from "../../redux";
 import { ProcessData } from "../interface";
 import ProcessList from "./processList";
 import * as s from "./styles";
 
 export default function ManageProcess() {
+  const rdata:any = useSelector(state=>state);
+  console.log(rdata.arr.arr.length,"length");
   const [data, setData] = useState<ProcessData>({
     pname: "",
     ptime: "",
     endTime: "",
-    id:0
+    id:rdata.arr.arr.length
   });
   const { pname, ptime, endTime } = data;
   const handleData = (e: any): void => {
@@ -20,7 +24,9 @@ export default function ManageProcess() {
     setData({
       ...data,
       [name]: value,
+      id:rdata.arr.arr.length
     });
+    console.log(data);
   };
   const [arr, setArr] = useState<ProcessData[]>([]);
   const addProcess = (): void => {
@@ -31,13 +37,17 @@ export default function ManageProcess() {
                 pname:"",
                 ptime:"",
                 endTime:"",
-                id:0
+                id:rdata.arr.arr.length
             })
             return;
         }
     }
     alert("정보를 모두 입력해주세요!");
   };
+  const dispatch = useDispatch();
+  const a=()=>{
+    dispatch(ReadyArr());
+  }
   return (
     <>
       <s.FlexContainer>
@@ -71,6 +81,9 @@ export default function ManageProcess() {
         <s.SubmitBtn onClick={addProcess}>ADD</s.SubmitBtn>
       </s.FlexContainer>
       <ProcessList arr={arr} />
+      <s.StartBtn onClick={a}>
+        START
+      </s.StartBtn>
     </>
   );
 }

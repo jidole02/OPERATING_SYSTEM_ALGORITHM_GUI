@@ -100,3 +100,17 @@ export const ListContents = styled.div`
   color: gray;
   font-size: 14px;
 `;
+
+export const StartBtn = styled.button`
+  width:100%;
+  height:40px;
+  background-color:${MAIN_COLOR};
+  border:none;
+  margin-top:40px;
+  color:white;
+  font-size:16px;
+  border-radius:3px;
+  :hover{
+    opacity:0.8;
+  }
+`

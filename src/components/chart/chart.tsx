@@ -7,15 +7,9 @@ import * as s from "./styles";
 
 export default function Chart() {
   const data:any = useSelector(state=>state);
-  console.log(data.arr.arr)
-  const arr: ProcessData[] = [
-    { pname: "p1", ptime: 10, endTime: 0, id: 1 },
-    { pname: "p2", ptime: 3, endTime: 3, id: 2 },
-    { pname: "p3", ptime: 3, endTime: 1, id: 3 },
-    { pname: "p4", ptime: 12, endTime: 2, id: 4 },
-  ];
+  console.log(data.arr.arr);
+  const [arr,setArr] = useState<ProcessData[]>([]);
   let FuncArr: ProcessData[] = arr;
-  const [render, setRender] = useState<boolean>(false);
   const [SortArr, setSortArr] = useState<ProcessData[]>([]);
   const [indexArr, setIndexArr] = useState<ProcessData[]>([]);
   const [timeline, setTimeline] = useState<boolean[]>([]);
@@ -36,27 +30,28 @@ export default function Chart() {
       }
     }
   };
+
+  useEffect(()=>{
+    setArr(data.arr.arr);
+    console.log('data바뀜')
+  },[data])
   
   // 실행시간 합
   const DecisionWidthValue = (): number => {
     let sum: number = 0;
     for (let i = 0; i < arr.length; i++) {
-      let pTime: any = SortArr[i]?.ptime;
-      if (typeof pTime === "number") {
-        sum += pTime;
-        if (i === arr.length - 1) return sum;
-      }
+      let pTime: any =FuncArr[i]?.ptime;
+/*       console.log(FuncArr,"funcarr"); */
+        sum += parseInt(pTime);
+        if (i === arr.length - 1) return sum; console.log(sum,"realsum")
     }
+    console.log(sum,"sum")
     return 0;
   };
-
-  useEffect(() => {
-    setRender(true);
-  }, []);
   useEffect(() => {
     // 처음에 정렬
     SortOfTime();
-  }, [render]);
+  }, [arr]);
   useEffect(() => {
     // timeline 그려주는 곳
     let someArr = [];
@@ -68,18 +63,20 @@ export default function Chart() {
       }
       if (i === DecisionWidthValue() - 1) setTimeline(someArr);
     }
-  }, [DecisionWidthValue()]);
+  }, [arr]);
 
 
   useEffect(() => {
     console.log("정렬 후")
+    console.log(DecisionWidthValue());
+    console.log("=====")
     // 정렬 다 됬으면
     let node = (e: any) => {
       return document.getElementById(`${e}`);
     };
-    for (let i = 0; i < SortArr.length; i++) {
+    for (let i = 0; i < FuncArr.length; i++) {
       // 그래프 하나씩 찍어주는 곳
-      let div = node(SortArr[i].id);
+      let div = node(FuncArr[i].id);
       let InsertNode = (color: string) => {
         return div?.insertAdjacentHTML(
           "beforebegin",
@@ -90,7 +87,7 @@ export default function Chart() {
       };
       // 첫번째 꺼는 대기시간 0 일테니까
       if (i === 0) {
-        for (let j = 0; j < SortArr[i].ptime; j++) {
+        for (let j = 0; j < FuncArr[i].ptime; j++) {
           InsertNode(MAIN_COLOR);
         }
       }
@@ -100,7 +97,7 @@ export default function Chart() {
         const RestricteReturn = (lim: number): number => {
           let sum = 0;
           for (let i = 0; i < lim; i++) {
-            let ptime: any = SortArr[i].ptime;
+            let ptime: any = FuncArr[i].ptime;
             if (typeof ptime === "number") {
               sum += ptime;
               if (i === lim - 1) return sum;
@@ -109,23 +106,23 @@ export default function Chart() {
           return 0;
         };
         // 들어오기 전 흰색으로 채워주고...
-        for (let j = 0; j < SortArr[i].endTime; j++) {
+        for (let j = 0; j < FuncArr[i].endTime; j++) {
           InsertNode("white");
         }
         // 들어오고 대기 그래프
-        let b: number | "" = SortArr[i].endTime;
+        let b: number | "" = FuncArr[i].endTime;
         if (typeof b === "number") {
           for (let j = b; j < RestricteReturn(i); j++) {
             InsertNode("whitesmoke");
           }
         }
         // 그리고 실행 그래프
-        for (let j = 0; j < SortArr[i].ptime; j++) {
+        for (let j = 0; j < FuncArr[i].ptime; j++) {
           InsertNode(MAIN_COLOR);
         }
       }
     }
-  }, [SortArr]);
+  }, [arr]);
 
 
   return (
