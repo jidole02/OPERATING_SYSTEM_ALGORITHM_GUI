@@ -75,7 +75,7 @@ export const SubmitBtn = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 20px;
   font-weight: bold;
   margin-bottom: 10px;
   :hover {
@@ -113,4 +113,11 @@ export const StartBtn = styled.button`
   :hover{
     opacity:0.8;
   }
+`
+
+export const AlertMent = styled.p`
+float:right;
+margin-top:20px;
+font-size:13px;
+color:red;
 `

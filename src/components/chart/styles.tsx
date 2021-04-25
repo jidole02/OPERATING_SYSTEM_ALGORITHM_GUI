@@ -1,6 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { PRIMARY_WIDTH } from "../../style";
 import { StyleProps } from "../interface";
+
+const WrapperAnim = keyframes`
+0%{
+  opacity:0;
+}
+100%{
+  opacity:1;
+}
+`;
 
 export const AllWrapper = styled.div`
   width: ${PRIMARY_WIDTH};
@@ -9,6 +18,7 @@ export const AllWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+  animation: ${WrapperAnim} 2s;
 `;
 
 export const Cotainer = styled.div`
@@ -27,7 +37,7 @@ export const ChartTop = styled.div`
   font-size: 12px;
   align-items: flex-end;
   padding-right: ${(props: StyleProps) => `${props.padding}%`};
-  box-sizing:border-box;
+  box-sizing: border-box;
 `;
 
 export const UseContainer = styled.div`
@@ -47,7 +57,7 @@ export const ProcessNameWrapper = styled(UseContainer)`
 
 export const GraphWrapper = styled(UseContainer)`
   width: 100%;
-  position:relative;
+  position: relative;
 `;
 
 export const Graph = styled.div`
@@ -72,22 +82,22 @@ export const SmallTimeLine = styled.div`
 `;
 
 export const GraphLineWrapper = styled.div`
-width:100%;
-position:absolute;
-height:100px;
-bottom:0;
-height:100%;
-opacity:0.5;
-display:flex;
-justify-content:space-between;
-padding-right: ${(props: StyleProps) => `${props.padding}%`};
-box-sizing:border-box;
-`
+  width: 100%;
+  position: absolute;
+  height: 100px;
+  bottom: 0;
+  height: 100%;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+  padding-right: ${(props: StyleProps) => `${props.padding}%`};
+  box-sizing: border-box;
+`;
 
 export const GraphLine = styled.div`
   border-left: 1px dashed gray;
-  height:100%;
-  :first-of-type{
-    border:none;
+  height: 100%;
+  :first-of-type {
+    border: none;
   }
-`
+`;

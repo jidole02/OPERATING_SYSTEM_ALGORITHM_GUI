@@ -76,6 +76,7 @@ export default function ManageProcess() {
           value={data.endTime}
         />
       </s.FlexContainer>
+      <s.AlertMent>도착시간에 0을 포함해주세요.</s.AlertMent>
       <s.FlexContainer style={{ justifyContent: "flex-end" }}>
         {!ready && <s.SubmitBtn onClick={addProcess}>ADD</s.SubmitBtn>}
       </s.FlexContainer>
