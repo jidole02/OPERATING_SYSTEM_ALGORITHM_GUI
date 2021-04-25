@@ -88,6 +88,6 @@ export const GraphLine = styled.div`
   border-left: 1px dashed gray;
   height:100%;
   :first-of-type{
-    opacity:0;
+    border:none;
   }
 `

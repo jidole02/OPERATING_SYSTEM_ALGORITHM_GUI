@@ -1,0 +1,1 @@
+export const READY_ARR = 'READY_ARR';
