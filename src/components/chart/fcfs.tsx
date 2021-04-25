@@ -7,33 +7,25 @@ import * as s from "./styles";
 
 export default function Fcfs() {
   const data: any = useSelector((state) => state);
-  console.log(data.arr.arr);
   const [arr, setArr] = useState<ProcessData[]>([]);
   let FuncArr: any = arr;
-  const [SortArr, setSortArr] = useState<ProcessData[]>([]);
-  const [indexArr, setIndexArr] = useState<ProcessData[]>([]);
   const [timeline, setTimeline] = useState<boolean[]>([]);
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
   //도착 시간에 따라 한번 정렬 해줘야됨.
   const SortOfTime = () => {
-    setSortArr([]);
     for (let i = 0; i < FuncArr.length; i++) {
       for (let j = 0; j < FuncArr.length - 1; j++) {
         if (FuncArr[j].endTime > FuncArr[j + 1].endTime) {
           let temp = FuncArr[j];
           FuncArr[j] = FuncArr[j + 1];
           FuncArr[j + 1] = temp;
-          setIndexArr(FuncArr);
         }
-        if (i === FuncArr.length - 1 && j === FuncArr.length - 2)
-          setSortArr(indexArr);
       }
     }
   };
 
   useEffect(() => {
     setArr(data.arr.arr);
-    console.log("data바뀜");
   }, [data]);
 
   // 실행시간 합
@@ -41,12 +33,9 @@ export default function Fcfs() {
     let sum: number = 0;
     for (let i = 0; i < arr.length; i++) {
       let pTime: any = FuncArr[i]?.ptime;
-      /*       console.log(FuncArr,"funcarr"); */
       sum += parseInt(pTime);
       if (i === arr.length - 1) return sum;
-      console.log(sum, "realsum");
     }
-    console.log(sum, "sum");
     return 0;
   };
   useEffect(() => {
@@ -67,9 +56,6 @@ export default function Fcfs() {
   }, [arr]);
 
   useEffect(() => {
-    console.log("정렬 후");
-    console.log(DecisionWidthValue());
-    console.log("=====");
     // 정렬 다 됬으면
     let node = (e: any) => {
       return document.getElementById(`${e}`);

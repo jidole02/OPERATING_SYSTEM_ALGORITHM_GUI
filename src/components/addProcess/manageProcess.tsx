@@ -6,48 +6,47 @@ import ProcessList from "./processList";
 import * as s from "./styles";
 
 export default function ManageProcess() {
-  const rdata:any = useSelector(state=>state);
-  console.log(rdata.arr.arr.length,"length");
+  const rdata: any = useSelector((state) => state);
   const [data, setData] = useState<ProcessData>({
     pname: "",
     ptime: "",
     endTime: "",
-    id:rdata.arr.arr.length
+    id: rdata.arr.arr.length,
   });
+  const ready:boolean = rdata.ready.ready;
   const { pname, ptime, endTime } = data;
   const handleData = (e: any): void => {
     const { name, value } = e.target;
     if (name !== "pname" && value < 0) {
-        e.target.value = ""
-        return;
+      e.target.value = "";
+      return;
     }
     setData({
       ...data,
       [name]: value,
-      id:rdata.arr.arr.length
+      id: rdata.arr.arr.length,
     });
-    console.log(data);
   };
   const [arr, setArr] = useState<ProcessData[]>([]);
   const addProcess = (): void => {
-    if ((pname !== "" && ptime !== 0 ) && endTime !== 0) {
-        if(ptime !== "" || endTime !== "") {
-            setArr((oldArr) => [...oldArr, data]);
-            setData({
-                pname:"",
-                ptime:"",
-                endTime:"",
-                id:rdata.arr.arr.length
-            })
-            return;
-        }
+    if (pname !== "" && ptime !== 0 && endTime !== 0) {
+      if (ptime !== "" || endTime !== "") {
+        setArr((oldArr) => [...oldArr, data]);
+        setData({
+          pname: "",
+          ptime: "",
+          endTime: "",
+          id: rdata.arr.arr.length,
+        });
+        return;
+      }
     }
     alert("정보를 모두 입력해주세요!");
   };
   const dispatch = useDispatch();
-  const a=()=>{
+  const a = () => {
     dispatch(ReadyArr());
-  }
+  };
   return (
     <>
       <s.FlexContainer>
@@ -78,12 +77,10 @@ export default function ManageProcess() {
         />
       </s.FlexContainer>
       <s.FlexContainer style={{ justifyContent: "flex-end" }}>
-        <s.SubmitBtn onClick={addProcess}>ADD</s.SubmitBtn>
+        {!ready && <s.SubmitBtn onClick={addProcess}>ADD</s.SubmitBtn>}
       </s.FlexContainer>
       <ProcessList arr={arr} />
-      <s.StartBtn onClick={a}>
-        START
-      </s.StartBtn>
+      <s.StartBtn onClick={a}>START</s.StartBtn>
     </>
   );
 }
