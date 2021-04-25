@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { MAIN_COLOR } from "../../style";
+import FcfsGantChart from "../gantChart/fcfsGantChart";
 import { ProcessData } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
@@ -109,6 +110,7 @@ export default function Fcfs() {
   }, [arr]);
 
   return (
+    <>
     <s.AllWrapper>
       <InforOfChapter title="FCFS 스케쥴링 표" />
 
@@ -117,6 +119,7 @@ export default function Fcfs() {
           {timeline.map((e: boolean, index: number) =>
             e ? <s.TimeLine key={index} /> : <s.SmallTimeLine key={index} />
           )}
+          <s.TimeLine/>
         </s.ChartTop>
 
         <s.Cotainer style={{ display: "flex" }}>
@@ -144,5 +147,7 @@ export default function Fcfs() {
         </s.Cotainer>
       </s.Cotainer>
     </s.AllWrapper>
+    <FcfsGantChart/>
+    </>
   );
 }

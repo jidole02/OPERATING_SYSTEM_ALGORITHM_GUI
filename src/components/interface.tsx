@@ -12,6 +12,8 @@ export interface ProcessData{
 export interface StyleProps{
     height? : string;
     padding? : number;
+    width? : string | number;
+    margin? : string | number;
 }
 
 export interface ActionType{

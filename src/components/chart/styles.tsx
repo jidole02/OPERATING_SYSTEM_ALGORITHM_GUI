@@ -17,7 +17,6 @@ export const AllWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
   animation: ${WrapperAnim} 2s;
 `;
 
@@ -36,7 +35,7 @@ export const ChartTop = styled.div`
   justify-content: space-between;
   font-size: 12px;
   align-items: flex-end;
-  padding-right: ${(props: StyleProps) => `${props.padding}%`};
+/*   padding-right: ${(props: StyleProps) => `${props.padding}%`}; */
   box-sizing: border-box;
 `;
 
