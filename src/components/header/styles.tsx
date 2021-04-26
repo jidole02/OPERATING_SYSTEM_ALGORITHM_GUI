@@ -10,6 +10,7 @@ export const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
   background-color: rgb(255,255,255,0.9);
+  z-index:500;
 `;
 
 export const Title = styled.p`

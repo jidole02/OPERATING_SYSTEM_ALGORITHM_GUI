@@ -1,16 +1,26 @@
+import { useSelector } from "react-redux";
 import InforOfChapter from "../public/InforOfChapter";
 import FcfsResult from "./fcfsResult";
 import * as s from "./styles";
 
 export default function Result() {
+  const rdata: any = useSelector((state) => state);
+  const waitSum = rdata.arr.waitTime;
+  const ReturnSum = rdata.arr.returnTime;
   return (
     <>
       <s.Wrapper>
         <InforOfChapter title="FCFS 결과보기"></InforOfChapter>
         <s.FlexContainer>
-          <FcfsResult />
+          <FcfsResult wait={waitSum} return={ReturnSum} />
         </s.FlexContainer>
-        <s.StartBtn onClick={()=>{window.location.reload()}}>RESTART</s.StartBtn>
+        <s.StartBtn
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
+          RESTART
+        </s.StartBtn>
       </s.Wrapper>
     </>
   );

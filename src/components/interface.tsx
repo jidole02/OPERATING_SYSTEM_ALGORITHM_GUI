@@ -19,15 +19,24 @@ export interface StyleProps{
 export interface ActionType{
     HANDLE_ARR? : string;
     READY_ARR? : string;
+    SET_WAIT? : string;
+    SET_RETURN? : string;
 }
 
 export interface Action{
     type:ActionType;
     arr:ProcessData[];
     ready:boolean;
+    waitTime:number;
+    returnTime:number;
 }
 
 export interface GantParam{
     arr : ProcessData[];
     sum : number;
+}
+
+export interface FcfsResultParams{
+    wait : number;
+    return : number;
 }
