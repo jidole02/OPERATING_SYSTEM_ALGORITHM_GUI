@@ -94,8 +94,7 @@ export default function Fcfs() {
       // 들어오고 대기 그래프
       let b: string = FuncArr[i].endTime;
       let wait = RestricteReturn(i) - parseInt(b);
-      let returnTime =
-        RestricteReturn(i) - parseInt(b) + parseInt(FuncArr[i].ptime);
+      let returnTime = RestricteReturn(i) - parseInt(b) + parseInt(FuncArr[i].ptime);
       waitSum += wait;
       returnSum += returnTime;
       {
@@ -110,10 +109,10 @@ export default function Fcfs() {
     }
   }, [arr]);
 
-  useEffect(() => {
-    if (waitSum > 0) dispatch(setWait(waitSum / FuncArr.length));
-    if (returnSum > 0) dispatch(setReturn(returnSum / FuncArr.length));
-  });
+  useEffect(()=>{
+    if(waitSum > 0) dispatch(setWait(waitSum / FuncArr.length));
+    if(returnSum > 0) dispatch(setReturn(returnSum / FuncArr.length));
+  })
 
   return (
     <>

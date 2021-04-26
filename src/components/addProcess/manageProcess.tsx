@@ -64,6 +64,7 @@ export default function ManageProcess() {
       alert("도착시간이 0인 프로세스를 포함해주세요!");
     }
   };
+  console.log(arr,"arr");
   return (
     <>
       <s.FlexContainer>
