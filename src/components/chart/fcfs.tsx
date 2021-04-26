@@ -147,7 +147,7 @@ export default function Fcfs() {
         </s.Cotainer>
       </s.Cotainer>
     </s.AllWrapper>
-    <FcfsGantChart/>
+    {FuncArr.length > 0 && <FcfsGantChart arr={FuncArr} sum={DecisionWidthValue()} />}
     </>
   );
 }

@@ -26,3 +26,8 @@ export interface Action{
     arr:ProcessData[];
     ready:boolean;
 }
+
+export interface GantParam{
+    arr : ProcessData[];
+    sum : number;
+}

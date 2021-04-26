@@ -13,7 +13,7 @@ export default function ManageProcess() {
     endTime: "",
     id: rdata.arr.arr.length,
   });
-  const ready:boolean = rdata.ready.ready;
+  const ready: boolean = rdata.ready.ready;
   const { pname, ptime, endTime } = data;
   const handleData = (e: any): void => {
     const { name, value } = e.target;
@@ -44,8 +44,25 @@ export default function ManageProcess() {
     alert("정보를 모두 입력해주세요!");
   };
   const dispatch = useDispatch();
-  const a = () => {
+  const Submit = (): void => {
     dispatch(ReadyArr());
+  };
+  const checkSub = () => {
+    let check = false;
+    if (arr.length < 1) {
+      alert("하나 이상 입력해 주세요!");
+      return;
+    }
+    arr.filter((e) => {
+      if (e.endTime == 0) {
+        Submit();
+        check = !check;
+        return;
+      }
+    });
+    if (!check) {
+      alert("도착시간이 0인 프로세스를 포함해주세요!");
+    }
   };
   return (
     <>
@@ -81,7 +98,7 @@ export default function ManageProcess() {
         {!ready && <s.SubmitBtn onClick={addProcess}>ADD</s.SubmitBtn>}
       </s.FlexContainer>
       <ProcessList arr={arr} />
-      <s.StartBtn onClick={a}>START</s.StartBtn>
+      <s.StartBtn onClick={checkSub}>START</s.StartBtn>
     </>
   );
 }
