@@ -96,6 +96,8 @@ export default function Fcfs() {
         }
         // 들어오고 대기 그래프
         let b: string = FuncArr[i].endTime;
+        console.log(RestricteReturn(i) - parseInt(b),"대기시간"); // 평균 대기 시간이 이거 다 더한거임
+        console.log(RestricteReturn(i) - parseInt(b) +parseInt(FuncArr[i].ptime),"반환" );
         {
           for (let j = parseInt(b); j < RestricteReturn(i); j++) {
             InsertNode("whitesmoke");

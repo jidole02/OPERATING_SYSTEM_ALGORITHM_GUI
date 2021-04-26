@@ -1,7 +1,7 @@
 import { MAIN_COLOR } from "../../style";
 import { GantParam } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
-import FcfsResult from "../result/fcfsResult";
+import Result from "../result/Result";
 import * as s from "./styles";
 
 export default function FcfsGantChart(e: GantParam) {
@@ -18,7 +18,7 @@ export default function FcfsGantChart(e: GantParam) {
   return (
     <>
       <s.Wrapper>
-        <InforOfChapter title="간트차트" />
+        <InforOfChapter title="FCFS 간트차트" />
         <s.GraphTimeLine style={{ marginTop: "50px" }}>
           <s.Time>0</s.Time>
           {data.map((e: any, index: number) => (
@@ -57,7 +57,7 @@ export default function FcfsGantChart(e: GantParam) {
           ))}
         </s.GraphTimeLine>
       </s.Wrapper>
-      <FcfsResult />
+      <Result />
     </>
   );
 }

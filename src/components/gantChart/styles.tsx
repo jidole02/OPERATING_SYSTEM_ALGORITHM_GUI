@@ -4,7 +4,6 @@ import { StyleProps } from "../interface";
 
 export const Wrapper = styled.div`
   width: ${PRIMARY_WIDTH};
-  margin-bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
