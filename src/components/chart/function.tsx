@@ -1,16 +1,19 @@
 // 도착시간 정렬
 export const SortOfTime = (FuncArr: any) => {
+  console.log(FuncArr);
   for (let i = 0; i < FuncArr.length; i++) {
     for (let j = 0; j < FuncArr.length - 1; j++) {
-      //
       if (FuncArr[j].endTime > FuncArr[j + 1].endTime) {
         let temp = FuncArr[j];
         FuncArr[j] = FuncArr[j + 1];
         FuncArr[j + 1] = temp;
       }
-      if (i === FuncArr.length - 1) return FuncArr;
+      if (i === FuncArr.length - 1) {
+        return FuncArr;
+      }
     }
   }
+  return FuncArr;
 };
 
 // 실행시간 합
@@ -58,7 +61,7 @@ export const CanvasTimeLine = (FuncArr: any): boolean[] => {
 export const RestricteReturn = (FuncArr: any, lim: number): number => {
   let sum = 0;
   for (let i = 0; i < lim; i++) {
-    let ptime: string = FuncArr[i].ptime;
+    let ptime: string = FuncArr[i]?.ptime;
     sum += parseInt(ptime);
     if (i === lim - 1) return sum;
   }
@@ -82,9 +85,9 @@ export const SortOfPTime = (FuncArr: any) => {
 export const Sjf = (indexArr:any,sortArr : any,arr:any) => {
   let FuncArr: any[] = [];
   // 여기서 sjf 정렬
-  for (let i = 0; i < indexArr.length; i++) {
+  for (let i = 0; i < indexArr?.length; i++) {
     FuncArr = [];
-    for (let j = i; j < indexArr.length; j++) {
+    for (let j = i; j < indexArr?.length; j++) {
       // 여기서 실행시간 합보다 도착시간이 작거나 같은 애들 걸러주고
       if (RestricteReturn(indexArr, i) >= parseInt(arr[j].endTime)) {
         FuncArr.push(arr[j]);

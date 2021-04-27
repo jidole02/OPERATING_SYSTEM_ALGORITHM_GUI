@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setReturn, setWait } from "../../redux";
 import { MAIN_COLOR } from "../../style";
-import FcfsGantChart from "../gantChart/fcfsGantChart";
+import GantChart from "../gantChart/GantChart";
 import { ProcessData } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
@@ -99,7 +99,7 @@ export default function Fcfs() {
         </s.Cotainer>
       </s.AllWrapper>
       {FuncArr.length > 0 && (
-        <FcfsGantChart arr={FuncArr} sum={f.DecisionWidthValue(FuncArr)} />
+        <GantChart name="FCFS" arr={FuncArr} sum={f.DecisionWidthValue(FuncArr)} />
       )}
     </>
   );

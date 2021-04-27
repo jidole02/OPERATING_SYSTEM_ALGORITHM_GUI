@@ -3,14 +3,14 @@ import InforOfChapter from "../public/InforOfChapter";
 import FcfsResult from "./fcfsResult";
 import * as s from "./styles";
 
-export default function Result() {
+export default function Result(e : any) {
   const rdata: any = useSelector((state) => state);
   const waitSum = rdata.arr.waitTime;
   const ReturnSum = rdata.arr.returnTime;
   return (
     <>
       <s.Wrapper>
-        <InforOfChapter title="FCFS 결과보기"></InforOfChapter>
+        <InforOfChapter title={e.name + " 결과보기"}></InforOfChapter>
         <s.FlexContainer>
           <FcfsResult wait={waitSum} return={ReturnSum} />
         </s.FlexContainer>

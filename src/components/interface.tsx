@@ -34,6 +34,7 @@ export interface Action{
 export interface GantParam{
     arr : ProcessData[];
     sum : number;
+    name : string;
 }
 
 export interface FcfsResultParams{

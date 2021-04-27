@@ -18,8 +18,8 @@ export default function Index() {
     >
       <Header />
       <AddProcess />
-      {ready && <Fcfs />}
-      {<Sjf/>}
+{/*       {ready && <Fcfs />} */}
+      {ready && <Sjf/>}
       <Footer/>
     </div>
   );

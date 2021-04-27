@@ -18,7 +18,7 @@ export default function FcfsGantChart(e: GantParam) {
   return (
     <>
       <s.Wrapper>
-        <InforOfChapter title="FCFS 간트차트" />
+        <InforOfChapter title={e.name + " 간트차트"} />
         <s.GraphTimeLine style={{ marginTop: "50px" }}>
           <s.Time>0</s.Time>
           {data.map((e: any, index: number) => (
@@ -57,7 +57,7 @@ export default function FcfsGantChart(e: GantParam) {
           ))}
         </s.GraphTimeLine>
       </s.Wrapper>
-      <Result />
+      <Result name={e.name} />
     </>
   );
 }

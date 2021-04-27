@@ -4,32 +4,51 @@ import * as s from "./styles";
 import * as f from "./function";
 import { ProcessData } from "../interface";
 import { MAIN_COLOR } from "../../style";
+import GantChart from "../gantChart/GantChart";
+import { useDispatch, useSelector } from "react-redux";
+import { setReturn, setWait } from "../../redux";
 
 export default function Sjf() {
+  const data: any = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [waitSum, setWaitSum] = useState<number>(0);
+  const [returnSum, setReturnSum] = useState<number>(0);
+  const [sjf, setSjf] = useState<any[]>([]);
   const [timeline, setTimeline] = useState<boolean[]>([]);
-  const [arr] = useState<any>([
+  const [arr, setArr] = useState<ProcessData[]>([]);
+/*   const [arr] = useState<any>([
     { pname: "p1", ptime: "7", endTime: "0", id: 1 },
     { pname: "p2", ptime: "4", endTime: "2", id: 2 },
     { pname: "p3", ptime: "1", endTime: "4", id: 3 },
     { pname: "p4", ptime: "4", endTime: "5", id: 4 },
     { pname: "p5", ptime: "2", endTime: "1", id: 5 },
-  ]);
+  ]); */
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
-  const copyArr = arr.slice();
   // index arr : endtime 정렬 배열
   const [indexArr, setIndexArr] = useState<any[]>([]);
   // sort arr : 최종 정렬 배열
   let sortArr: any[] = [];
   useEffect(() => {
-    setIndexArr(f.SortOfTime(copyArr));
-  }, []);
-
+      console.log(f.SortOfTime(arr.slice()))
+    setIndexArr(f.SortOfTime(arr.slice()));
+  }, [arr]);
+  useEffect(() => {
+    setArr(data.arr.arr);
+  }, [data]);
   useEffect(() => {
     setTimeline(f.CanvasTimeLine(arr));
-    sortArr.push(indexArr[0]);
-    console.log(f.Sjf(indexArr, sortArr, arr));
-  }, [indexArr]);
-
+    if(indexArr?.length >= 0){
+        if (indexArr[0] !== undefined) {
+            sortArr.push(indexArr[0]);
+          }
+    }
+    // sjf
+    console.log(arr)
+    console.log(indexArr)
+    f.Sjf(indexArr, sortArr, arr);
+    setSjf(f.Sjf(indexArr, sortArr, arr));
+  }, [indexArr]);//
+  console.log(sjf)
   useEffect(() => {
     for (let i = 0; i < sortArr.length; i++) {
       // 들어오기 전 흰색으로 채워주고...
@@ -43,6 +62,8 @@ export default function Sjf() {
         f.RestricteReturn(sortArr, i) -
         parseInt(b) +
         parseInt(sortArr[i]?.ptime);
+      setWaitSum((e: number) => e + wait);
+      setReturnSum((e: number) => e + returnTime);
       {
         for (let j = parseInt(b); j < f.RestricteReturn(sortArr, i); j++) {
           f.InsertNode(sortArr, i, "whitesmoke");
@@ -54,6 +75,12 @@ export default function Sjf() {
       }
     }
   }, [indexArr]);
+
+  useEffect(() => {
+    if (waitSum > 0) dispatch(setWait(waitSum / sjf.length));
+    if (returnSum > 0) dispatch(setReturn(returnSum / sjf.length));
+  }, [waitSum, returnSum, sjf.length, dispatch]);
+
   return (
     <>
       <s.AllWrapper>
@@ -90,6 +117,9 @@ export default function Sjf() {
           </s.Cotainer>
         </s.Cotainer>
       </s.AllWrapper>
+      {sjf[0] !== undefined && sjf.length > 0 && (
+        <GantChart name="SJF" arr={sjf} sum={f.DecisionWidthValue(sjf)} />
+      )}
     </>
   );
 }
