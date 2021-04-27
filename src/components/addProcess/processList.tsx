@@ -8,7 +8,7 @@ export default function ProcessList({arr} : any) {
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(handleArr(arr));
-    },[arr])
+    },[arr,dispatch])
     return(
         <>
         {arr.map((e : ProcessData,index : number)=>{

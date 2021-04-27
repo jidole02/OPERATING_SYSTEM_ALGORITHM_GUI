@@ -13,8 +13,8 @@ export default function Fcfs() {
   const dispatch = useDispatch();
   const [arr, setArr] = useState<ProcessData[]>([]);
   let FuncArr: any = arr.slice();
-  let waitSum = 0;
-  let returnSum = 0;
+  const [waitSum,setWaitSum] = useState<number>(0);
+  const [returnSum,setReturnSum] = useState<number>(0);
   const [timeline, setTimeline] = useState<boolean[]>([]);
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
 
@@ -43,8 +43,8 @@ export default function Fcfs() {
         f.RestricteReturn(FuncArr, i) -
         parseInt(b) +
         parseInt(FuncArr[i].ptime);
-      waitSum += wait;
-      returnSum += returnTime;
+      setWaitSum((e :number)=>e+wait);
+      setReturnSum((e:number)=>e+returnTime);
       {
         for (let j = parseInt(b); j < f.RestricteReturn(FuncArr, i); j++) {
           f.InsertNode(FuncArr, i, "whitesmoke");
@@ -60,7 +60,7 @@ export default function Fcfs() {
   useEffect(() => {
     if (waitSum > 0) dispatch(setWait(waitSum / FuncArr.length));
     if (returnSum > 0) dispatch(setReturn(returnSum / FuncArr.length));
-  });
+  },[waitSum,returnSum,FuncArr.length,dispatch]);
 
   return (
     <>

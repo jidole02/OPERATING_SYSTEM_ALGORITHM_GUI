@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ReadyArr } from "../../redux";
 import { ProcessData } from "../interface";
@@ -7,6 +7,10 @@ import * as s from "./styles";
 
 export default function ManageProcess() {
   const rdata: any = useSelector((state) => state);
+  const Input = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    Input.current!.focus();
+  },[]);
   const [data, setData] = useState<ProcessData>({
     pname: "",
     ptime: "",
@@ -29,8 +33,8 @@ export default function ManageProcess() {
   };
   const [arr, setArr] = useState<ProcessData[]>([]);
   const addProcess = (): void => {
-    if (pname !== "" && ptime !== 0 && endTime !== 0) {
-      if (ptime !== "" || endTime !== "") {
+    if (pname !== "" && ptime !== 0) {
+      if (ptime !== "" && endTime !== "") {
         setArr((oldArr) => [...oldArr, data]);
         setData({
           pname: "",
@@ -38,6 +42,7 @@ export default function ManageProcess() {
           endTime: "",
           id: rdata.arr.arr.length,
         });
+        Input.current!.focus();
         return;
       }
     }
@@ -65,6 +70,11 @@ export default function ManageProcess() {
       alert("도착시간이 0인 프로세스를 포함해주세요!");
     }
   };
+  window.onkeyup = (e: any) => {
+    if (e.keyCode === 13) {
+      addProcess();
+    }
+  };
   return (
     <>
       <s.FlexContainer>
@@ -74,6 +84,7 @@ export default function ManageProcess() {
       </s.FlexContainer>
       <s.FlexContainer>
         <s.ProcessInput
+          ref={Input}
           placeholder="프로세스명을 입력하세요."
           name="pname"
           onChange={handleData}
