@@ -6,59 +6,37 @@ import FcfsGantChart from "../gantChart/fcfsGantChart";
 import { ProcessData } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
+import * as f from "./function"
 
 export default function Fcfs() {
   const data: any = useSelector((state) => state);
   const dispatch = useDispatch();
   const [arr, setArr] = useState<ProcessData[]>([]);
   let FuncArr: any = arr.slice();
-  console.log(FuncArr,"fcfs funcarr")
   let waitSum = 0;
   let returnSum = 0;
   const [timeline, setTimeline] = useState<boolean[]>([]);
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
   //도착 시간에 따라 한번 정렬 해줘야됨.
-  const SortOfTime = () => {
-    for (let i = 0; i < FuncArr.length; i++) {
-      for (let j = 0; j < FuncArr.length - 1; j++) {
-        if (FuncArr[j].endTime > FuncArr[j + 1].endTime) {
-          let temp = FuncArr[j];
-          FuncArr[j] = FuncArr[j + 1];
-          FuncArr[j + 1] = temp;
-        }
-      }
-    }
-  };
 
   useEffect(() => {
-    console.log(data.arr.arr);
     setArr(data.arr.arr);
   }, [data]);
 
-  // 실행시간 합
-  const DecisionWidthValue = (): number => {
-    let sum: number = 0;
-    for (let i = 0; i < arr.length; i++) {
-      let pTime: any = FuncArr[i]?.ptime;
-      sum += parseInt(pTime);
-      if (i === arr.length - 1) return sum;
-    }
-    return 0;
-  };
-  useEffect(() => {
-    // 처음에 정렬
-    SortOfTime();
-  }, [arr]);
+  useEffect(()=>{
+    f.SortOfTime(FuncArr);
+  },[arr])
+
   useEffect(() => {
     // timeline 그려주는 곳
     let someArr = [];
-    for (let i = 0; i < DecisionWidthValue(); i++) {
+    for (let i = 0; i < f.DecisionWidthValue(FuncArr); i++) {
       if (i % 10 === 0) {
         someArr.push(true);
       } else {
         someArr.push(false);
       }
-      if (i === DecisionWidthValue() - 1) setTimeline(someArr);
+      if (i === f.DecisionWidthValue(FuncArr) - 1) setTimeline(someArr);
     }
   }, [arr]);
 
@@ -74,7 +52,7 @@ export default function Fcfs() {
         return div?.insertAdjacentHTML(
           "beforebegin",
           `<div style="background-color:${color};width:${
-            100 / DecisionWidthValue()
+            100 / f.DecisionWidthValue(FuncArr)
           }%" />`
         );
       };
@@ -122,7 +100,7 @@ export default function Fcfs() {
         <InforOfChapter title="FCFS 스케쥴링 표" />
 
         <s.Cotainer>
-          <s.ChartTop padding={100 / DecisionWidthValue()}>
+          <s.ChartTop padding={100 / f.DecisionWidthValue(FuncArr)}>
             {timeline.map((e: boolean, index: number) =>
               e ? <s.TimeLine key={index} /> : <s.SmallTimeLine key={index} />
             )}
@@ -145,7 +123,7 @@ export default function Fcfs() {
                   </s.Graph>
                 );
               })}
-              <s.GraphLineWrapper padding={100 / DecisionWidthValue()}>
+              <s.GraphLineWrapper padding={100 / f.DecisionWidthValue(FuncArr)}>
                 {timeline.map((_e: boolean, index: number) => {
                   return <s.GraphLine key={index} />;
                 })}
@@ -155,7 +133,7 @@ export default function Fcfs() {
         </s.Cotainer>
       </s.AllWrapper>
       {FuncArr.length > 0 && (
-        <FcfsGantChart arr={FuncArr} sum={DecisionWidthValue()} />
+        <FcfsGantChart arr={FuncArr} sum={f.DecisionWidthValue(FuncArr)} />
       )}
     </>
   );

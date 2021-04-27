@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
+import * as f from './function'
 
 export default function Sjf() {
   const arr = [
     { pname: "p1", ptime: "3", endTime: "0", id: "1" },
     { pname: "p2", ptime: "5", endTime: "1", id: "2" },
-    { pname: "p3", ptime: "1", endTime: "2", id: "3" },
-    { pname: "p4", ptime: "2", endTime: "3", id: "4" },
+    { pname: "p3", ptime: "1", endTime: "3", id: "3" },
+    { pname: "p4", ptime: "2", endTime: "2", id: "4" },
   ];
   // 실행시간 합
   const PtimeSum =():number=>{
@@ -19,10 +20,8 @@ export default function Sjf() {
   }
   console.log(PtimeSum())
   useEffect(()=>{
-      for(let i =0;i<arr.length;i++){
-          
-      }
-  },[])
+      console.log(f.SortOfTime(arr))
+  })
   return (
     <>
       <s.AllWrapper>
