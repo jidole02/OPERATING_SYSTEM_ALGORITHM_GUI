@@ -6,7 +6,7 @@ import FcfsGantChart from "../gantChart/fcfsGantChart";
 import { ProcessData } from "../interface";
 import InforOfChapter from "../public/InforOfChapter";
 import * as s from "./styles";
-import * as f from "./function"
+import * as f from "./function";
 
 export default function Fcfs() {
   const data: any = useSelector((state) => state);
@@ -17,88 +17,55 @@ export default function Fcfs() {
   let returnSum = 0;
   const [timeline, setTimeline] = useState<boolean[]>([]);
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
-  //도착 시간에 따라 한번 정렬 해줘야됨.
 
   useEffect(() => {
     setArr(data.arr.arr);
   }, [data]);
 
-  useEffect(()=>{
-    f.SortOfTime(FuncArr);
-  },[arr])
-
   useEffect(() => {
-    // timeline 그려주는 곳
-    let someArr = [];
-    for (let i = 0; i < f.DecisionWidthValue(FuncArr); i++) {
-      if (i % 10 === 0) {
-        someArr.push(true);
-      } else {
-        someArr.push(false);
-      }
-      if (i === f.DecisionWidthValue(FuncArr) - 1) setTimeline(someArr);
-    }
+    f.SortOfTime(FuncArr);
   }, [arr]);
 
   useEffect(() => {
-    // 정렬 다 됬으면
-    let node = (e: any) => {
-      return document.getElementById(`${e}`);
-    };
+    setTimeline(f.CanvasTimeLine(FuncArr));
+  }, [arr]);
+
+  useEffect(() => {
     for (let i = 0; i < FuncArr.length; i++) {
-      // 그래프 하나씩 찍어주는 곳
-      let div = node(FuncArr[i].id);
-      let InsertNode = (color: string) => {
-        return div?.insertAdjacentHTML(
-          "beforebegin",
-          `<div style="background-color:${color};width:${
-            100 / f.DecisionWidthValue(FuncArr)
-          }%" />`
-        );
-      };
-      // 첫번째 꺼는 대기시간 0 일테니까
-      // 여기서 실행시간 더한거 보내주고
-      const RestricteReturn = (lim: number): number => {
-        let sum = 0;
-        for (let i = 0; i < lim; i++) {
-          let ptime: string = FuncArr[i].ptime;
-          sum += parseInt(ptime);
-          if (i === lim - 1) return sum;
-        }
-        return 0;
-      };
       // 들어오기 전 흰색으로 채워주고...
       for (let j = 0; j < parseInt(FuncArr[i].endTime); j++) {
-        InsertNode("white");
+        f.InsertNode(FuncArr, i, "white");
       }
       // 들어오고 대기 그래프
       let b: string = FuncArr[i].endTime;
-      let wait = RestricteReturn(i) - parseInt(b);
-      let returnTime = RestricteReturn(i) - parseInt(b) + parseInt(FuncArr[i].ptime);
+      let wait = f.RestricteReturn(FuncArr, i) - parseInt(b);
+      let returnTime =
+        f.RestricteReturn(FuncArr, i) -
+        parseInt(b) +
+        parseInt(FuncArr[i].ptime);
       waitSum += wait;
       returnSum += returnTime;
       {
-        for (let j = parseInt(b); j < RestricteReturn(i); j++) {
-          InsertNode("whitesmoke");
+        for (let j = parseInt(b); j < f.RestricteReturn(FuncArr, i); j++) {
+          f.InsertNode(FuncArr, i, "whitesmoke");
         }
         // 그리고 실행 그래프
         for (let j = 0; j < parseInt(FuncArr[i].ptime); j++) {
-          InsertNode(MAIN_COLOR);
+          f.InsertNode(FuncArr, i, MAIN_COLOR);
         }
       }
     }
   }, [arr]);
 
-  useEffect(()=>{
-    if(waitSum > 0) dispatch(setWait(waitSum / FuncArr.length));
-    if(returnSum > 0) dispatch(setReturn(returnSum / FuncArr.length));
-  })
+  useEffect(() => {
+    if (waitSum > 0) dispatch(setWait(waitSum / FuncArr.length));
+    if (returnSum > 0) dispatch(setReturn(returnSum / FuncArr.length));
+  });
 
   return (
     <>
       <s.AllWrapper>
         <InforOfChapter title="FCFS 스케쥴링 표" />
-
         <s.Cotainer>
           <s.ChartTop padding={100 / f.DecisionWidthValue(FuncArr)}>
             {timeline.map((e: boolean, index: number) =>
@@ -106,7 +73,6 @@ export default function Fcfs() {
             )}
             <s.TimeLine />
           </s.ChartTop>
-
           <s.Cotainer style={{ display: "flex" }}>
             {/* 여기가 프로세스 명 container */}
             <s.ProcessNameWrapper height={WrapperHeight}>
