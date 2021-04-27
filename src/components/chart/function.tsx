@@ -78,3 +78,30 @@ export const SortOfPTime = (FuncArr: any) => {
     }
   }
 };
+
+export const Sjf = (indexArr:any,sortArr : any,arr:any) => {
+  let FuncArr: any[] = [];
+  // 여기서 sjf 정렬
+  for (let i = 0; i < indexArr.length; i++) {
+    FuncArr = [];
+    for (let j = i; j < indexArr.length; j++) {
+      // 여기서 실행시간 합보다 도착시간이 작거나 같은 애들 걸러주고
+      if (RestricteReturn(indexArr, i) >= parseInt(arr[j].endTime)) {
+        FuncArr.push(arr[j]);
+      }
+    }
+    const SPArr: any[] = SortOfPTime(FuncArr);
+    for (let k = 0; k < SPArr?.length; k++) {
+      for (let j = 0; j < sortArr.length; j++) {
+        // 여기에서 id 안겹치면 조건 만족하므로 sortArr에 넣어주면 됨
+        if (SPArr[k].id === sortArr[j].id) {
+          break;
+        }
+        if (j === sortArr.length - 1) {
+          sortArr.push(SPArr[k]);
+        }
+      }
+    }
+  }
+  return sortArr;
+};
