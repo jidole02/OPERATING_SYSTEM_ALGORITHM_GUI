@@ -41,26 +41,40 @@ export const InsertNode = (FuncArr: any, i: number, color: string) => {
 };
 
 // 타임라인 찍는 함수
-export const CanvasTimeLine =(FuncArr : any) : boolean[]=>{
-    let someArr = [];
-    for (let i = 0; i < DecisionWidthValue(FuncArr); i++) {
-      if (i % 10 === 0) {
-        someArr.push(true);
-      } else {
-        someArr.push(false);
-      }
-      if (i === DecisionWidthValue(FuncArr) - 1) return someArr;
-    } 
-    return [];
-}
+export const CanvasTimeLine = (FuncArr: any): boolean[] => {
+  let someArr = [];
+  for (let i = 0; i < DecisionWidthValue(FuncArr); i++) {
+    if (i % 10 === 0) {
+      someArr.push(true);
+    } else {
+      someArr.push(false);
+    }
+    if (i === DecisionWidthValue(FuncArr) - 1) return someArr;
+  }
+  return [];
+};
 
 // lim 배열까지의 실행시간 합
-export const RestricteReturn = (FuncArr : any,lim: number): number => {
-    let sum = 0;
-    for (let i = 0; i < lim; i++) {
-      let ptime: string = FuncArr[i].ptime;
-      sum += parseInt(ptime);
-      if (i === lim - 1) return sum;
+export const RestricteReturn = (FuncArr: any, lim: number): number => {
+  let sum = 0;
+  for (let i = 0; i < lim; i++) {
+    let ptime: string = FuncArr[i].ptime;
+    sum += parseInt(ptime);
+    if (i === lim - 1) return sum;
+  }
+  return 0;
+};
+
+// 실행시간에 따라 정렬
+export const SortOfPTime = (FuncArr: any) => {
+  for (let i = 0; i < FuncArr.length; i++) {
+    for (let j = 0; j < FuncArr.length - 1; j++) {
+      if (parseInt(FuncArr[j].ptime) > parseInt(FuncArr[j+1].ptime)) {
+        let temp = FuncArr[j];
+        FuncArr[j] = FuncArr[j + 1];
+        FuncArr[j + 1] = temp;
+      }
+      if (i === FuncArr.length - 1) return FuncArr;
     }
-    return 0;
-  };
+  }
+};
