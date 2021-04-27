@@ -11,7 +11,8 @@ export default function Fcfs() {
   const data: any = useSelector((state) => state);
   const dispatch = useDispatch();
   const [arr, setArr] = useState<ProcessData[]>([]);
-  let FuncArr: any = arr;
+  let FuncArr: any = arr.slice();
+  console.log(FuncArr,"fcfs funcarr")
   let waitSum = 0;
   let returnSum = 0;
   const [timeline, setTimeline] = useState<boolean[]>([]);
@@ -30,6 +31,7 @@ export default function Fcfs() {
   };
 
   useEffect(() => {
+    console.log(data.arr.arr);
     setArr(data.arr.arr);
   }, [data]);
 

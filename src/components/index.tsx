@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import AddProcess from "./addProcess/addProcess";
 import Fcfs from "./chart/fcfs";
+import Sjf from "./chart/sjf";
 import Header from "./header/header";
 import Footer from "./result/footer";
 
@@ -17,7 +18,8 @@ export default function Index() {
     >
       <Header />
       <AddProcess />
-      {ready && <Fcfs />}
+      {/* {ready && <Fcfs />} */}
+      {ready && <Sjf/>}
       <Footer/>
     </div>
   );
