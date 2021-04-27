@@ -54,11 +54,12 @@ export default function ManageProcess() {
       return;
     }
     arr.filter((e) => {
-      if (e.endTime == 0) {
+      if (e.endTime === 0 || e.endTime === "0") {
         Submit();
         check = !check;
-        return;
+        return true;
       }
+      return false;
     });
     if (!check) {
       alert("도착시간이 0인 프로세스를 포함해주세요!");
