@@ -1,0 +1,1 @@
+export const CHOICE_SCHEDULE = 'CHOICE_SCHEDULE'
