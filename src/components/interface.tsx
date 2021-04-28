@@ -21,6 +21,7 @@ export interface ActionType{
     READY_ARR? : string;
     SET_WAIT? : string;
     SET_RETURN? : string;
+    CHOICE_SCHEDULE? : string
 }
 
 export interface Action{
@@ -29,6 +30,7 @@ export interface Action{
     ready:boolean;
     waitTime:number;
     returnTime:number;
+    schedule:string;
 }
 
 export interface GantParam{
@@ -40,4 +42,8 @@ export interface GantParam{
 export interface FcfsResultParams{
     wait : number;
     return : number;
+}
+
+export interface ScheduleParams{
+    schedule : string;
 }

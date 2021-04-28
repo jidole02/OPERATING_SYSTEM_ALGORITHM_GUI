@@ -8,6 +8,7 @@ import Footer from "./result/footer";
 export default function Index() {
   const data: any = useSelector((state) => state);
   const ready = data.ready.ready;
+  const schedule = data.schedule.schedule
   return (
     <div
       style={{
@@ -18,9 +19,16 @@ export default function Index() {
     >
       <Header />
       <AddProcess />
-{/*       {ready && <Fcfs />} */}
-      {ready && <Sjf/>}
-      <Footer/>
+      {
+        ready?
+        schedule === 'SJF'
+        ? <Sjf/>
+        : schedule === 'FCFS'
+        ? <Fcfs/>
+        :''
+        :''
+      }
+      <Footer />
     </div>
   );
 }
