@@ -16,20 +16,13 @@ export default function Sjf() {
   const [sjf, setSjf] = useState<any[]>([]);
   const [timeline, setTimeline] = useState<boolean[]>([]);
   const [arr, setArr] = useState<ProcessData[]>([]);
-/*   const [arr] = useState<any>([
-    { pname: "p1", ptime: "7", endTime: "0", id: 1 },
-    { pname: "p2", ptime: "4", endTime: "2", id: 2 },
-    { pname: "p3", ptime: "1", endTime: "4", id: 3 },
-    { pname: "p4", ptime: "4", endTime: "5", id: 4 },
-    { pname: "p5", ptime: "2", endTime: "1", id: 5 },
-  ]); */
   const WrapperHeight: string = `${(arr.length + 1) * 40}px`;
   // index arr : endtime 정렬 배열
   const [indexArr, setIndexArr] = useState<any[]>([]);
   // sort arr : 최종 정렬 배열
   let sortArr: any[] = [];
   useEffect(() => {
-      console.log(f.SortOfTime(arr.slice()))
+
     setIndexArr(f.SortOfTime(arr.slice()));
   }, [arr]);
   useEffect(() => {
@@ -43,12 +36,9 @@ export default function Sjf() {
           }
     }
     // sjf
-    console.log(arr)
-    console.log(indexArr)
     f.Sjf(indexArr, sortArr, arr);
     setSjf(f.Sjf(indexArr, sortArr, arr));
   }, [indexArr]);//
-  console.log(sjf)
   useEffect(() => {
     for (let i = 0; i < sortArr.length; i++) {
       // 들어오기 전 흰색으로 채워주고...

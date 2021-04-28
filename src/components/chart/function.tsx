@@ -1,6 +1,5 @@
 // 도착시간 정렬
 export const SortOfTime = (FuncArr: any) => {
-  console.log(FuncArr);
   for (let i = 0; i < FuncArr.length; i++) {
     for (let j = 0; j < FuncArr.length - 1; j++) {
       if (FuncArr[j].endTime > FuncArr[j + 1].endTime) {
