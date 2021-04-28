@@ -7,6 +7,7 @@ import * as s from "./styles";
 
 export default function ManageProcess() {
   const rdata: any = useSelector((state) => state);
+  const schedule = rdata.schedule.schedule;
   const Input = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     Input.current!.focus();
@@ -53,6 +54,10 @@ export default function ManageProcess() {
     dispatch(ReadyArr());
   };
   const checkSub = () => {
+    if(schedule === ""){
+      alert("스케쥴링 종류를 선택해주세요!")
+      return;
+    }
     let check = false;
     if (arr.length < 1) {
       alert("하나 이상 입력해 주세요!");

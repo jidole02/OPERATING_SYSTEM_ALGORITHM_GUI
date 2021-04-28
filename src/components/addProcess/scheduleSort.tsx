@@ -1,11 +1,19 @@
 import * as s from "./styles";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { HandleSchedule } from "../../redux";
 
 export default function ScheduleSort() {
   const ScheduleArr: string[] = ["FCFS", "SJF", "SRT"];
   const [schedule, setSchedule] = useState<string>("");
+  const dispatch = useDispatch();
   const Choice = (e: any): void => {
+    if(e.target.id === "SRT"){
+      alert('아직 개발중입니다...');
+      return;
+    }
     setSchedule(e.target.id);
+    dispatch(HandleSchedule(e.target.id));
   };
   return (
     <>
